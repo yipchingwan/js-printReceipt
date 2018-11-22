@@ -26,14 +26,12 @@ function printReceipt (barCodeInCar) {
 
         }     
     });
-
     //filter item from allitems
     filteredItems= allItems.filter(item=>{
         if(item.barcode in groupedItem){
             return item;
         }
     });
-
     //map count to filtered items
     filteredItems.map(items=>items.count = groupedItem[items.barcode]);
 
@@ -41,7 +39,7 @@ function printReceipt (barCodeInCar) {
     filteredItems.map(items=>{
         if(promotionsItems[0].barcodes.includes(items.barcode)){
             if(items.count>=2){
-                items.realCount = items.count-1;
+                items.realCount = items.count-parseInt(items.count/3);
             }
             else{
                 items.realCount = items.count;
@@ -51,7 +49,6 @@ function printReceipt (barCodeInCar) {
             items.realCount = items.count;
         }
     });
-
     //using filtered items to format string
     result = '***<store earning no money>Receipt ***\n';
     filteredItems.forEach(items=>{
